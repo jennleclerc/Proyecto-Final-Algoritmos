@@ -1,0 +1,101 @@
+//Jennifer Pucachaqui//
+#include <locale.h>
+#include <stdio.h>
+#include <conio.h>
+int main() {
+    float est, peso, dosis;
+    int edad, genero, rep = 1, totalestudiantes=0,estudiantescondosis = 0;
+    char respuesta;
+    float dosisestudiantes[50]; 
+    setlocale(LC_CTYPE,"Spanish");
+    while (rep) {
+        printf("\nDatos del estudiante %d\n", totalestudiantes + 1);
+        printf("Ingrese la edad: ");
+        scanf("%d", &edad);
+
+        while (edad < 3 || edad > 60) {
+            wprintf(L"La edad ingresada es incorrecta, para ser considerado estudiante debe estar en el rango de edad (3-60) años.\n");
+            printf("Ingrese nuevamente: ");
+            scanf("%d", &edad);
+        }
+        if (edad >= 18) {
+            wprintf(L"Ingrese el género (M/F): 1 para Masculino, 2 para Femenino: ");
+            scanf("%d", &genero);
+
+            if (genero == 1) {
+                printf("Ingrese la estatura en metros (m): ");
+                scanf("%f", &est);
+                while (est < 1.50 || est > 1.90) {
+                    printf("Estatura incorrecta. Debe estar entre (1.50-1.90) metros.\n");
+                    printf("Ingrese nuevamente:");
+                    scanf("%f", &est);
+                }
+
+                printf("Ingrese el peso en libras (lb): ");
+                scanf("%f", &peso);
+
+                while (peso < 110 || peso > 178) {
+                    printf("Peso incorrecto. Debe estar entre (110-178) libras.\n");
+                    printf("Ingrese nuevamente:");
+                    scanf("%f", &peso);
+                }
+
+                if (est > 1.60 && peso >= 150) {
+                    dosis = 0.20 * est + 0.80 * peso;
+                } else {
+                    dosis = 0.30 * est + 0.70 * peso;
+                }
+                dosisestudiantes[totalestudiantes] = dosis; 
+                printf("Este estudiante debe consumir %.2f gramos de vitaminas.\n", dosis);
+                estudiantescondosis++;
+            } else if (genero == 2) {
+                printf("Ingrese la estatura en metros (m): ");
+                scanf("%f", &est);
+
+                while (est < 1.40 || est > 1.75) {
+                    printf("Estatura incorrecta. Debe estar entre (1.40-1.75) metros.\n");
+                    printf("Ingrese nuevamente:");
+                    scanf("%f", &est);
+                }
+
+                printf("Ingrese el peso en libras (lb): ");
+                scanf("%f", &peso);
+
+                while (peso < 100 || peso > 155) {
+                    printf("Peso incorrecto. Debe estar entre (100-155) libras.\n");
+                    printf("Ingrese nuevamente:");
+                    scanf("%f", &peso);
+                }
+
+                if (est > 1.50 && peso >= 130) {
+                    dosis = 0.25 * est + 0.75 * peso;
+                } else {
+                    dosis = 0.35 * est + 0.65 * peso;
+                }
+                dosisestudiantes[totalestudiantes] = dosis; 
+                printf("Este estudiante debe consumir %.2f gramos de vitaminas.\n", dosis);
+                estudiantescondosis++;
+            }
+        } else {
+            wprintf(L"La cantidad de vitaminas solo es aplicable a personas mayores de 18 años.\n");
+            dosisestudiantes[totalestudiantes] = 0.0; 
+        }
+        totalestudiantes++;
+        wprintf(L"¿Desea calcular vitaminas para otro estudiante? (S/N): ");
+        scanf(" %c", &respuesta);
+        if (respuesta != 'S' && respuesta != 's') {
+            wprintf(L"Entendido. Ejecución Finalizada.\n");
+        }
+        rep = (respuesta == 'S' || respuesta == 's');
+    }
+    printf("\nReporte de Dosis por Estudiante:\n");
+    for (int i = 0; i < totalestudiantes; i++) {
+        if (dosisestudiantes[i] > 0.0) 
+        {
+            printf("Estudiante %d - Dosis: %.2f gramos de vitaminas.\n", i + 1, dosisestudiantes[i]);
+        } else {
+            printf("Estudiante %d - No recibe dosis de vitaminas.\n", i + 1);
+        }
+    }
+    getch ();
+    ret
