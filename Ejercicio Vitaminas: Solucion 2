@@ -98,4 +98,6 @@ int main() {
         }
     }
     getch ();
-    ret
+    return 0:
+ }
+    
